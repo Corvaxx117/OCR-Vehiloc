@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Véhicloc — Accueil
+{% endblock %}
+
+{% block hero %}
+	<div class="flex-header">
+		<div>
+			<h1>Location de voitures à Saint-Étienne</h1>
+			<p>Un service de location de voitures au mois pour répondre à vos besoins de mobilité.</p>
+		</div>
+		<div>
+			<img src="{{ asset('assets/img/car.png') }}" alt="Voiture">
+		</div>
+	</div>
+{% endblock %}
+
+{% block body %}
+
+	<section id="fleet">
+		<h2>Découvrez la flotte de véhicules chez Véhicloc</h2>
+		<p>Que vous ayez besoin d'une petite citadine agile, d'une berline élégante ou même d'un SUV spacieux, nous avons une variété de véhicules  pour répondre à vos exigences.</p>
+		<div class="fleet-list">
+			{% if cars is empty %}
+				<p>Aucun véhicule pour le moment.</p>
+			{% else %}
+				{% for car in cars %}
+					<article>
+						<div class="mini-car-title">
+							<a href="{{ path('car_show', {slug: car.slug}) }}">
+								<h3>{{ car.name }}</h3>
+							</a>
+							<div>
+								<p class="subtitle">Places:
+									{{ car.places }}
+									•
+									{{ car.motor|capitalize }}</p>
+							</div>
+						</div>
+						<div class="mini-car-icons">
+							<div>
+								<img src="{{ asset('assets/icons/persons.png') }}" alt="{{ car.places }} places"/>
+								<p>{{ car.places }}
+									places</p>
+							</div>
+							<div>
+								<img src="{{ asset('assets/icons/motor.png') }}" alt="{{ car.motor|capitalize }}"/>
+								<p>{{ car.motor|capitalize }}</p>
+							</div>
+							<div>
+								<img src="{{ asset('assets/icons/km.png') }}" alt="Km illimités"/>
+								<p>Km illimités</p>
+							</div>
+							<div>
+								<img src="{{ asset('assets/icons/plus.png') }}" alt="Plus"/>
+								<p>Plus</p>
+							</div>
+						</div>
+						<div class="mini-car-price">
+							<p class="price-per-day">{{ (car.dailyPrice / 100)|number_format(2, ',', ' ') }}
+								€ / jour</p>
+							<p class="price-per-month">{{ (car.monthlyPrice / 100)|number_format(2, ',', ' ') }}
+								€ / mois</p>
+						</div>
+					</article>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</section>
+
+	<section id="promises">
+		<div>
+			<h2>La promesse Véhicloc</h2>
+			<div class="promise">
+				<img src="{{ asset('assets/icons/insurance.png') }}" alt="Assurance et Assistance">
+				<div class="promise-text">
+					<h3>Assurance et Assistance</h3>
+					<p>Couverture adaptée et aide 24/7.</p>
+				</div>
+			</div>
+			<div class="promise">
+				<img src="{{ asset('assets/icons/booking.png') }}" alt="Réservation facile">
+				<div class="promise-text">
+					<h3>Réservation facile</h3>
+					<p>Processus clair et rapide.</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<img src="{{ asset('assets/img/promise.png') }}" alt="La promesse Véhicloc">
+		</div>
+	</section>
+{% endblock %}
