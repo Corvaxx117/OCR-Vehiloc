@@ -56,11 +56,4 @@ Règles :
 -   Attribut `#[Route(...)]` sur la classe, pas de méthode publique supplémentaire
 -   Injection de dépendances par constructeur uniquement quand nécessaire
 
-Étapes suivantes possibles :
-
--   Créer entité Car + migration
--   Ajouter un CarRepository + persistance dans CarCreateAction (POST)
--   Séparer la vue base en layout + composants (partials Twig)
--   Mettre en place tests fonctionnels pour chaque action
-
 ---

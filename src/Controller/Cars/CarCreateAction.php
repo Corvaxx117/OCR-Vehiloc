@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Cars;
 
 use App\Entity\Car;
@@ -15,19 +17,23 @@ final class CarCreateAction extends AbstractController
 {
     public function __invoke(Request $request, EntityManagerInterface $em): Response
     {
-        $car = new Car();
+        $car  = new Car();
+
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $monthly = $form->get('monthlyPrice')->getData();
             $daily = $form->get('dailyPrice')->getData();
+
             $car->setMonthlyPrice($monthly * 100);
             $car->setDailyPrice($daily * 100);
 
             $em->persist($car);
             $em->flush();
+
             $this->addFlash('success', 'Voiture ajoutée.');
+
             return $this->redirectToRoute('home');
         }
 

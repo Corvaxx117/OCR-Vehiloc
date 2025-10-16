@@ -30,6 +30,11 @@
 							<a href="{{ path('car_show', {slug: car.slug}) }}">
 								<h3>{{ car.name }}</h3>
 							</a>
+							<form method="post" action="{{ path('car_delete', {id: car.id}) }}" class="delete-form" onsubmit="return confirm('Supprimer ce véhicule ?');">
+								<button type="submit" class="btn-trash" aria-label="Supprimer">
+									<img src="{{ asset('assets/icons/trash.png') }}" alt="Supprimer"/>
+								</button>
+							</form>
 							<div>
 								<p class="subtitle">Places:
 									{{ car.places }}

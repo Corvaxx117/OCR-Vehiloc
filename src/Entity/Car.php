@@ -36,8 +36,6 @@ class Car
     #[ORM\Column(length: 140, unique: true)]
     private ?string $slug = null;
 
-
-
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -156,24 +154,6 @@ class Car
         return $this;
     }
 
-    #[ORM\PrePersist]
-    public function onPrePersist(): void
-    {
-        $now = new \DateTimeImmutable();
-        $this->createdAt = $this->createdAt ?? $now;
-        $this->updatedAt = $this->updatedAt ?? $now;
-        $this->computeSlug();
-    }
-
-    #[ORM\PreUpdate]
-    public function onPreUpdate(): void
-    {
-        $this->updatedAt = new \DateTimeImmutable();
-        $this->computeSlug();
-    }
-
-
-
     /**
      * Génère le slug à partir du nom :
      * - strtolower + trim pour nettoyer
@@ -202,5 +182,21 @@ class Car
     public function getMonthlyPriceEuro(): ?float
     {
         return $this->monthlyPrice !== null ? $this->monthlyPrice / 100 : null;
+    }
+
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $now = new \DateTimeImmutable();
+        $this->createdAt = $this->createdAt ?? $now;
+        $this->updatedAt = $this->updatedAt ?? $now;
+        $this->computeSlug();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+        $this->computeSlug();
     }
 }

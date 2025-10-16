@@ -143,6 +143,7 @@ article {
     box-sizing: border-box;
     margin-bottom: 35px;
     max-width: 95%;
+    position: relative;
 }
 
 .mini-car-title h3 {
@@ -161,6 +162,31 @@ article {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+}
+
+/* Bouton suppression véhicule */
+.delete-form {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    z-index: 2;
+}
+.btn-trash {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+.btn-trash img {
+    width: 18px;
+    height: 18px;
+}
+.btn-trash:hover img {
+    filter: brightness(0.6);
 }
 
 .mini-car-icons {
